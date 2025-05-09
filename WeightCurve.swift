@@ -21,7 +21,7 @@ public class WeightCurve {
     
     static let scale = Float(2048.0)
     
-    public let spline = MathKit.ManualSpline()
+    public let spline = ManualSpline()
     public let mapper = WeightCurveMapper()
     
     public var frameWidth = Float(0.0)
@@ -37,7 +37,7 @@ public class WeightCurve {
     public var rangeX = Float(0.0)
     public var rangeY = Float(0.0)
     
-    private let mudgeSpline = MathKit.ManualSpline()
+    private let mudgeSpline = ManualSpline()
     
     public init() {
         
@@ -189,26 +189,26 @@ public class WeightCurve {
                 var isValidReading = true
                 
                 if inDist > epsilon1 {
-                    rotation = MathKit.Math.face(target: .init(x: -inTanX, y: -inTanY))
+                    rotation = Math.face(target: .init(x: -inTanX, y: -inTanY))
                 } else if outDist > epsilon1 {
-                    rotation = MathKit.Math.face(target: .init(x: outTanX, y: outTanY))
+                    rotation = Math.face(target: .init(x: outTanX, y: outTanY))
                 } else if inDist > epsilon2 {
-                    rotation = MathKit.Math.face(target: .init(x: -inTanX, y: -inTanY))
+                    rotation = Math.face(target: .init(x: -inTanX, y: -inTanY))
                 } else if outDist > epsilon2 {
-                    rotation = MathKit.Math.face(target: .init(x: outTanX, y: outTanY))
+                    rotation = Math.face(target: .init(x: outTanX, y: outTanY))
                 } else if inDist > epsilon3 {
-                    rotation = MathKit.Math.face(target: .init(x: -inTanX, y: -inTanY))
+                    rotation = Math.face(target: .init(x: -inTanX, y: -inTanY))
                 } else if outDist > epsilon3 {
-                    rotation = MathKit.Math.face(target: .init(x: outTanX, y: outTanY))
+                    rotation = Math.face(target: .init(x: outTanX, y: outTanY))
                 } else {
                     isValidReading = false
                 }
                 
-                if inDist > MathKit.Math.epsilon {
+                if inDist > Math.epsilon {
                     inDist = sqrtf(inDist)
                 }
                 
-                if outDist > MathKit.Math.epsilon {
+                if outDist > Math.epsilon {
                     outDist = sqrtf(outDist)
                 }
                 
@@ -572,8 +572,8 @@ public class WeightCurve {
                              count: Int) -> Float {
         var percentY = _percentLinear(index: index,
                                       count: count)
-        let range = MathKit.Math.pi_2
-        let mininum = MathKit.Math._pi_4
+        let range = Math.pi_2
+        let mininum = Math._pi_4
         percentY = tanf(mininum + percentY * range)
         let lowestValue = tanf(mininum)
         let highestValue = tanf(mininum + range)
@@ -587,7 +587,7 @@ public class WeightCurve {
                               count: Int) -> Float {
         var percentY = _percentSkewed(index: index,
                                       count: count)
-        percentY = sinf(percentY * MathKit.Math.pi_2)
+        percentY = sinf(percentY * Math.pi_2)
         if percentY < 0.0 { percentY = 0.0 }
         if percentY > 1.0 { percentY = 1.0 }
         return percentY

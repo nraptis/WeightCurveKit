@@ -10,7 +10,7 @@
 import Foundation
 import MathKit
 
-public class WeightCurveMapperNodeSegment: MathKit.PrecomputedLineSegment {
+public class WeightCurveMapperNodeSegment: PrecomputedLineSegment {
     
     public var isIllegal = false
     

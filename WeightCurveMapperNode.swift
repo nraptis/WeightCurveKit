@@ -62,7 +62,7 @@ public class WeightCurveMapperNode {
         overlappingWeightCurveMapperNodeSegmentCount = 0
     }
     
-    func build(spline: MathKit.ManualSpline, startPosition: Float, endPosition: Float) {
+    func build(spline: ManualSpline, startPosition: Float, endPosition: Float) {
     
         purgeWeightCurveMapperNodeSegments()
         
@@ -167,7 +167,7 @@ public class WeightCurveMapperNode {
                 for overlappingWeightCurveMapperNodeSegmentIndex in 0..<overlappingWeightCurveMapperNodeSegmentCount {
                     let overlappingWeightCurveMapperNodeSegment = overlappingWeightCurveMapperNodeSegments[overlappingWeightCurveMapperNodeSegmentIndex]
                     
-                    let rayRayResult = MathKit.Math.rayIntersectionRay(rayOrigin1X: overlappingWeightCurveMapperNodeSegment.x1,
+                    let rayRayResult = Math.rayIntersectionRay(rayOrigin1X: overlappingWeightCurveMapperNodeSegment.x1,
                                                                rayOrigin1Y: overlappingWeightCurveMapperNodeSegment.y1,
                                                                rayNormal1X: overlappingWeightCurveMapperNodeSegment.normalX,
                                                                rayNormal1Y: overlappingWeightCurveMapperNodeSegment.normalY,
@@ -187,8 +187,6 @@ public class WeightCurveMapperNode {
                             bestY = chosenY
                             newWeightCurveMapperNodePoint.y = bestY
                         }
-                    @unknown default:
-                        break
                     }
                 }
             }

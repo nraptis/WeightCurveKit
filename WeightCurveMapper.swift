@@ -12,7 +12,7 @@ import MathKit
 
 public class WeightCurveMapper {
     
-    func build(spline: MathKit.ManualSpline) {
+    func build(spline: ManualSpline) {
         purgeWeightCurveMapperNodes()
         
         var index = 0

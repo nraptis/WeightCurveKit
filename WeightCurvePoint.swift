@@ -10,9 +10,9 @@
 import Foundation
 import MathKit
 
-public class WeightCurvePoint: MathKit.PointProtocol {
-    public typealias Point = MathKit.Math.Point
-    public typealias Vector = MathKit.Math.Vector
+public class WeightCurvePoint: PointProtocol {
+    public typealias Point = Math.Point
+    public typealias Vector = Math.Vector
     public var x = Float(0.0)
     public var y = Float(0.0)
     public var point: Point {
