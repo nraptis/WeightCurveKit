@@ -21,7 +21,7 @@ public class WeightCurve {
     
     static let scale = Float(2048.0)
     
-    public let spline = ManualSpline()
+    public let spline = FancySpline()
     public let mapper = WeightCurveMapper()
     
     public var frameWidth = Float(0.0)
@@ -37,7 +37,7 @@ public class WeightCurve {
     public var rangeX = Float(0.0)
     public var rangeY = Float(0.0)
     
-    private let mudgeSpline = ManualSpline()
+    private let mudgeSpline = FancySpline()
     
     public init() {
         
@@ -49,7 +49,6 @@ public class WeightCurve {
                                      paddingV: Float,
                                      tanFactorWeightCurve: Float,
                                      tanFactorWeightCurveAuto: Float,
-                                     
                                      weightCurveControlPointStart: WeightCurveControlPoint,
                                      owningList: [some WeightCurveControlPointOwning],
                                      owningListCount: Int,
@@ -138,13 +137,15 @@ public class WeightCurve {
                 let dirX = sinf(weightCurveControlPoint.normalizedTanDirection)
                 let dirY = -cosf(weightCurveControlPoint.normalizedTanDirection)
                 
-                mudgeSpline.enableManualControlTan(at: weightCurveControlPointIndex,
+                mudgeSpline.enableManualControlTanIn(at: weightCurveControlPointIndex,
                                                    inTanX: -dirX * magnitudeIn,
-                                                   inTanY: -dirY * magnitudeIn,
+                                                   inTanY: -dirY * magnitudeIn)
+                mudgeSpline.enableManualControlTanOut(at: weightCurveControlPointIndex,
                                                    outTanX: dirX * magnitudeOut,
                                                    outTanY: dirY * magnitudeOut)
             } else {
-                mudgeSpline.disableManualControlTan(at: weightCurveControlPointIndex)
+                mudgeSpline.disableManualControlTanIn(at: weightCurveControlPointIndex)
+                mudgeSpline.disableManualControlTanOut(at: weightCurveControlPointIndex)
             }
         }
         
@@ -620,11 +621,12 @@ public class WeightCurve {
             let dirX = sinf(weightCurveControlPoint.normalizedTanDirection)
             let dirY = -cosf(weightCurveControlPoint.normalizedTanDirection)
             
-            spline.enableManualControlTan(at: weightCurveControlPointIndex,
-                                          inTanX: -dirX * magnitudeIn,
-                                          inTanY: -dirY * magnitudeIn,
-                                          outTanX: dirX * magnitudeOut,
-                                          outTanY: dirY * magnitudeOut)
+            spline.enableManualControlTanIn(at: weightCurveControlPointIndex,
+                                            inTanX: -dirX * magnitudeIn,
+                                            inTanY: -dirY * magnitudeIn)
+            spline.enableManualControlTanOut(at: weightCurveControlPointIndex,
+                                             outTanX: dirX * magnitudeOut,
+                                             outTanY: dirY * magnitudeOut)
         }
         spline.solve(closed: false)
         mapper.build(spline: spline)

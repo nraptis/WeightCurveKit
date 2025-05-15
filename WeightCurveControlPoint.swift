@@ -110,4 +110,52 @@ public class WeightCurveControlPoint {
              paddingV: paddingV)
     }
     
+    public func getTanHandles(index: Int,
+                              count: Int,
+                              frameWidth: Float,
+                              frameHeight: Float,
+                              paddingH: Float,
+                              paddingV: Float) -> TanHandles {
+        let x = getX(index: index,
+                     count: count,
+                     frameWidth: frameWidth,
+                     paddingH: paddingH)
+        let y = getY(index: index,
+                     count: count,
+                     isManual: isManualHeightEnabled,
+                     frameHeight: frameHeight,
+                     paddingV: paddingV)
+        let dirX = sinf(normalizedTanDirection)
+        let dirY = -cosf(normalizedTanDirection)
+        
+        let width = (frameWidth - paddingH - paddingH)
+        let height = (frameHeight - paddingV - paddingV)
+        
+        var splineFactorX = Float(1.0)
+        if count > 1 {
+            splineFactorX = 1.0 / Float(count - 1)
+        }
+        
+        return TanHandles(inX: x - dirX * normalizedTanMagnitudeIn * width * splineFactorX,
+                          inY: y - dirY * normalizedTanMagnitudeIn * height,
+                          outX: x + dirX * normalizedTanMagnitudeOut * width * splineFactorX,
+                          outY: y + dirY * normalizedTanMagnitudeOut * height)
+    }
+    
+    public func getTanHandlesRelativeOnlyY(index: Int,
+                                           count: Int,
+                                           frameHeight: Float,
+                                           paddingV: Float) -> TanHandles {
+        
+        
+        let dirY = -cosf(normalizedTanDirection)
+        
+        let height = (frameHeight - paddingV - paddingV)
+        
+        return TanHandles(inX: 0.0,
+                          inY: -(dirY * normalizedTanMagnitudeIn * height),
+                          outX: 0.0,
+                          outY: dirY * normalizedTanMagnitudeOut * height)
+    }
+    
 }

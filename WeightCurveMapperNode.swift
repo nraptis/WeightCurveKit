@@ -62,7 +62,7 @@ public class WeightCurveMapperNode {
         overlappingWeightCurveMapperNodeSegmentCount = 0
     }
     
-    func build(spline: ManualSpline, startPosition: Float, endPosition: Float) {
+    func build(spline: FancySpline, startPosition: Float, endPosition: Float) {
     
         purgeWeightCurveMapperNodeSegments()
         
